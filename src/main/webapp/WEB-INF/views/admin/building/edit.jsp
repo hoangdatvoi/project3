@@ -38,11 +38,11 @@
                             </div>
                             <!-- Quận -->
                             <div class="form-group">
-                                <label class="col-xs-3">Quận</label>
+                                <label class="col-xs-3"> Quận</label>
                                 <div class="col-xs-9">
                                     <form:select class="form-control" path="district">
-                                        <form:option value="">---chọn quận---</form:option>
-                                        <form:options items="${districts}"></form:options>
+                                        <form:option value="">---Chọn Quận---</form:option>
+                                        <form:options items="${districts}"/>
                                     </form:select>
                                 </div>
                             </div>
@@ -200,13 +200,13 @@
                                     <form:input path="brokerageFee" class="form-control"/>
                                 </div>
                             </div>
-                            <!-- Loại tòa nhà -->
-                                <%--     <div class="form-group">
-                                         <label class="col-xs-3 control-label">Loại tòa nhà</label>
-                                         <div class="col-xs-9">
-                                             <form:checkboxes path="typeCode" items="${typeCodes}"/>
-                                         </div>
-                                     </div>--%>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Loại tòa nhà</label>
+                                <div class="col-xs-9">
+                                    <form:checkboxes path="typeCode" items="${typeCodes}"/>
+                                </div>
+                            </div>
                             <!-- Ghi chú -->
                             <div class="form-group">
                                 <label class="col-xs-3">Ghi chú</label>
