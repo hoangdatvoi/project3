@@ -28,7 +28,7 @@
                     <div class="col-xs-12 ">
                         <!-- Form inputs -->
                         <!-- Tên tòa nhà -->
-                        <form class="form-horizontal" role="form" id="form-edit"
+                        <form class="form-horizontal" role="form"
                         >
                             <div class="form-group">
                                 <label class="col-xs-3">Tên tòa nhà</label>
@@ -223,16 +223,19 @@
                                             tòa
                                             nhà
                                         </button>
-                                        <button type="button" class="btn btn-primary">Hủy thao tác</button>
+                                        <button type="button" class="btn btn-primary" id="btnCancel">Hủy thao tác
+                                        </button>
                                     </c:if>
                                     <c:if test="${ not empty buildingEdit.id}">
                                         <button type="button" class="btn btn-primary" id="btnAddOrUpdateBuilding">Cập
                                             nhật
                                         </button>
-                                        <button type="button" class="btn btn-primary">Hủy thao tác</button>
+                                        <button type="button" class="btn btn-primary" id="btnCancel">Hủy thao tác
+                                        </button>
                                     </c:if>
                                 </div>
                             </div>
+                            <form:hidden path="id" id="buildingId"/>
                         </form>
                     </div>
                 </form:form>
@@ -259,20 +262,35 @@
             });
             data["typeCode"] = typeCode;
             // Call the API
-            $.ajax({
-                type: 'POST',
-                url: "${buildingAPI}",
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                dataType: 'json',
-                success: function (response) {
-                    console.log("success");
-                },
-                error: function (response) {
-                    console.log("error");
-                }
-            });
+            if (typeCode != "") {
+                addOrUpdateBuilding(data);
+            } else {
+
+                window.location.href = "<c:url value = "/admin/building-edit?typeCode=require" />";
+            }
+
         });
+    });
+
+    function addOrUpdateBuilding(data) {
+        $.ajax({
+            type: 'POST',
+            url: "/api/building",
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                console.log("success");
+            },
+            error: function (response) {
+                console.log("error");
+            }
+        });
+    }
+
+    $("#btnCancel").click(function () {
+        window.location.href = "/admin/building-list";
+
     });
 </script>
 </body>
