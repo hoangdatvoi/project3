@@ -4,8 +4,6 @@ package com.javaweb.model.response;
 import com.javaweb.model.dto.AbstractDTO;
 
 public class BuildingSearchResponse extends AbstractDTO {
-    private Long id;
-
     private String name;
     private String address;
     private Long numberOfBasement;
@@ -17,15 +15,6 @@ public class BuildingSearchResponse extends AbstractDTO {
     private Long rentPrice;
     private String serviceFee;
     private Double brokerageFee;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 
     public String getManagerName() {
         return managerName;

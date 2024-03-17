@@ -32,8 +32,8 @@ public class BuildingController {
         ModelAndView mvc = new ModelAndView("admin/building/list");
 
         List<BuildingSearchResponse> responses = buildingService.buildingList(buildingSearchRequest);
-        mvc.addObject("buildingList", responses);
         mvc.addObject("modelSearch", buildingSearchRequest);
+        mvc.addObject("buildingList", responses);
         mvc.addObject("listStaffs", userService.getStaffs());
         mvc.addObject("districts", DistrictCode.type());
         mvc.addObject("typeCodes", BuildingType.type());
