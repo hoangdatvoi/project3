@@ -24,7 +24,7 @@ public class BuildingEntity extends BaseEntity {
     private Integer floorarea;
     @Column(name = "managername")
     private String managername;
-    @Column(name = "managerphonenumber")
+    @Column(name = "managerphone")
     private String managerphonenumber;
     @Column(name = "rentprice")
     private Integer rentprice;
@@ -36,7 +36,7 @@ public class BuildingEntity extends BaseEntity {
 
     @Column(name = "servicefee")
     private Integer servicefee;
-    @Column(name = "brokeragefee")
+    @Column(name = "brokeragetee")
     private Integer brokeragefee;
 
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY)

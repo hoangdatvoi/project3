@@ -24,12 +24,17 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 
     @Override
     public List<BuildingEntity> buildingEntities(BuildingSearchRequest buildingSearchRequest) {
-        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.id, b.name, b.street, b.type, b.district, b.numberofbasement, b.ward, b.floorarea, b.managername, b.managerphonenumber, b.rentprice, b.direction, b.level, b.servicefee, b.brokeragefee FROM building b");
-        StringBuilder where = new StringBuilder(" WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM building b");
+        StringBuilder where = new StringBuilder(" WHERE 1=1 ");
         sql.append(where);
         Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
         return query.getResultList();
 
+
+    }
+
+    private static void queryNormal(BuildingSearchRequest buildingSearchRequest) {
+        if(!buildingSearchRequest.equals("staffId")&&!buildingSearchRequest.equals(""))
 
     }
 
