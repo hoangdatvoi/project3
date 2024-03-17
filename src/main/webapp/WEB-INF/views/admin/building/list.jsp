@@ -298,7 +298,7 @@
                                         <th>Phí môi giới</th>
                                         <th>Phí dịch vụ</th>
                                         <th>Giá thuê</th>
-                                        <th class="hidden-480">Thao tác</th>
+                                        <th>Thao tác</th>
 
 
                                     </tr>
@@ -311,7 +311,7 @@
                                                 <label class="pos-rel">
                                                     <input type="checkbox" class="ace" name="checkList"
                                                            value="${item.id}">
-                                                    
+
 
                                                 </label>
                                             </td>
