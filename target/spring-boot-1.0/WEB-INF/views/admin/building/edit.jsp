@@ -262,7 +262,7 @@
             });
             data["typeCode"] = typeCode;
             // Call the API
-            if (typeCode != "") {
+            if (data != "") {
                 addOrUpdateBuilding(data);
             } else {
 
@@ -280,10 +280,11 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                console.log("success");
+                console.log("API Response:", response);
+
             },
-            error: function (response) {
-                console.log("error");
+            error: function (xhr, status, error) {
+                console.log("error")
             }
         });
     }

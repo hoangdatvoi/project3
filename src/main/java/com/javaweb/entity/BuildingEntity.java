@@ -25,9 +25,9 @@ public class BuildingEntity extends BaseEntity {
     @Column(name = "managername")
     private String managername;
     @Column(name = "managerphone")
-    private String managerphonenumber;
+    private String managerphone;
     @Column(name = "rentprice")
-    private Integer rentprice;
+    private Long rentprice;
 
     @Column(name = "direction")
     private String direction;
@@ -90,6 +90,14 @@ public class BuildingEntity extends BaseEntity {
         return name;
     }
 
+    public String getManagerphone() {
+        return managerphone;
+    }
+
+    public void setManagerphone(String managerphone) {
+        this.managerphone = managerphone;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -123,9 +131,6 @@ public class BuildingEntity extends BaseEntity {
         this.floorarea = floorarea;
     }
 
-    public void setManagerphonenumber(String managerphonenumber) {
-        this.managerphonenumber = managerphonenumber;
-    }
 
     public String getManagername() {
         return managername;
@@ -135,12 +140,11 @@ public class BuildingEntity extends BaseEntity {
         this.managername = managername;
     }
 
-
-    public Integer getRentprice() {
+    public Long getRentprice() {
         return rentprice;
     }
 
-    public void setRentprice(Integer rentprice) {
+    public void setRentprice(Long rentprice) {
         this.rentprice = rentprice;
     }
 
@@ -148,9 +152,6 @@ public class BuildingEntity extends BaseEntity {
         return floorarea;
     }
 
-    public String getManagerphonenumber() {
-        return managerphonenumber;
-    }
 
     public String getDirection() {
         return direction;

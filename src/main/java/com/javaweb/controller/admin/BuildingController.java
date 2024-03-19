@@ -1,11 +1,14 @@
 package com.javaweb.controller.admin;
 
 
+import com.javaweb.converter.BuildingDTOConvert;
+import com.javaweb.entity.BuildingEntity;
 import com.javaweb.enums.BuildingType;
 import com.javaweb.enums.DistrictCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.repository.BuildingRepository;
 import com.javaweb.service.BuildingService;
 import com.javaweb.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,10 @@ public class BuildingController {
     private UserService userService;
     @Autowired
     private BuildingService buildingService;
+    @Autowired
+    private BuildingRepository buildingRepository;
+    @Autowired
+    private BuildingDTOConvert buildingDTOConvert;
 
     @GetMapping(value = "/admin/building-list")
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
@@ -42,7 +49,7 @@ public class BuildingController {
 
 
     @GetMapping(value = "/admin/building-edit")
-    public ModelAndView buildingEdit(@ModelAttribute("buildingEdit") BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
+    public ModelAndView buildingEdit(@ModelAttribute("buildingEdit") BuildingDTO buildingDTO, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/building/edit");
 
 
@@ -54,8 +61,13 @@ public class BuildingController {
     @GetMapping(value = "/admin/building-edit-{id}")
     public ModelAndView buildingEdit(@PathVariable("id") Long id, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/building/edit");
+        BuildingEntity building = buildingRepository.findById(id).get();
+        BuildingDTO buildingDTO = buildingDTOConvert.tobuildingDTO(building);
+        /*BuildingDTO buildingDTO = new BuildingDTO();*/
+        mvc.addObject("buildingEdit", buildingDTO);
         mvc.addObject("districts", DistrictCode.type());
         mvc.addObject("typeCodes", BuildingType.type());
+
 
         return mvc;
     }

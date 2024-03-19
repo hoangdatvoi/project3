@@ -3,6 +3,7 @@ package com.javaweb.repository.custom.impl;
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.repository.BuildingRepository;
+import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class BuildingRepositoryImpl implements BuildingRepository {
+public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -28,8 +29,10 @@ public class BuildingRepositoryImpl implements BuildingRepository {
     public List<BuildingEntity> buildingEntities(BuildingSearchRequest buildingSearchRequest) {
         StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM building b");
         joinTable(buildingSearchRequest, sql);
+        System.out.println(sql);
         StringBuilder where = new StringBuilder(" WHERE 1=1");
         queryNormal(buildingSearchRequest, where);
+        System.out.println(sql);
         querySpecial(buildingSearchRequest, where);
         sql.append(where);
         Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
@@ -44,11 +47,11 @@ public class BuildingRepositoryImpl implements BuildingRepository {
             for (Field item : fields) {
                 item.setAccessible(true);
                 String fieldName = item.getName();
-                if (!fieldName.equals("staffId") && !fieldName.startsWith("area")
-                        && !fieldName.startsWith("rent") && !fieldName.equals("typeCode")) {
+                if (!fieldName.equals("staffId") && !fieldName.equals("typeCode") && !fieldName.startsWith("area")
+                        && !fieldName.startsWith("rent")) {
 
                     Object value = item.get(buildingSearchRequest);
-                    if (value != null) {
+                    if (value != "" && value != null) {
                         if (item.getType().getName().equals("java.lang.Long") || item.getType().getName().equals("java.lang.Integer")) {
 
                             where.append(" and b." + fieldName + "=" + value);
@@ -58,6 +61,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
                         }
 
                     }
+
                 }
 
             }
@@ -124,124 +128,4 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 
     }
 
-
-    @Override
-    public List<BuildingEntity> findAll() {
-        return null;
-    }
-
-    @Override
-    public List<BuildingEntity> findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page<BuildingEntity> findAll(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public List<BuildingEntity> findAllById(Iterable<Long> longs) {
-        return null;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Long aLong) {
-
-    }
-
-    @Override
-    public void delete(BuildingEntity entity) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable<? extends BuildingEntity> entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
-
-    @Override
-    public <S extends BuildingEntity> S save(S entity) {
-        return null;
-    }
-
-    @Override
-    public <S extends BuildingEntity> List<S> saveAll(Iterable<S> entities) {
-        return null;
-    }
-
-    @Override
-    public Optional<BuildingEntity> findById(Long aLong) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean existsById(Long aLong) {
-        return false;
-    }
-
-    @Override
-    public void flush() {
-
-    }
-
-    @Override
-    public <S extends BuildingEntity> S saveAndFlush(S entity) {
-        return null;
-    }
-
-    @Override
-    public void deleteInBatch(Iterable<BuildingEntity> entities) {
-
-    }
-
-    @Override
-    public void deleteAllInBatch() {
-
-    }
-
-    @Override
-    public BuildingEntity getOne(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public <S extends BuildingEntity> Optional<S> findOne(Example<S> example) {
-        return Optional.empty();
-    }
-
-    @Override
-    public <S extends BuildingEntity> List<S> findAll(Example<S> example) {
-        return null;
-    }
-
-    @Override
-    public <S extends BuildingEntity> List<S> findAll(Example<S> example, Sort sort) {
-        return null;
-    }
-
-    @Override
-    public <S extends BuildingEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public <S extends BuildingEntity> long count(Example<S> example) {
-        return 0;
-    }
-
-    @Override
-    public <S extends BuildingEntity> boolean exists(Example<S> example) {
-        return false;
-    }
 }
