@@ -177,4 +177,3 @@ public class BuildingEntity extends BaseEntity {
         this.type = type;
     }
 }
-

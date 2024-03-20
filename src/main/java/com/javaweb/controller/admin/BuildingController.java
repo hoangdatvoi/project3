@@ -3,6 +3,7 @@ package com.javaweb.controller.admin;
 
 import com.javaweb.converter.BuildingDTOConvert;
 import com.javaweb.entity.BuildingEntity;
+import com.javaweb.entity.RentAreaEntity;
 import com.javaweb.enums.BuildingType;
 import com.javaweb.enums.DistrictCode;
 import com.javaweb.model.dto.BuildingDTO;
@@ -51,8 +52,6 @@ public class BuildingController {
     @GetMapping(value = "/admin/building-edit")
     public ModelAndView buildingEdit(@ModelAttribute("buildingEdit") BuildingDTO buildingDTO, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/building/edit");
-
-
         mvc.addObject("districts", DistrictCode.type());
         mvc.addObject("typeCodes", BuildingType.type());
         return mvc;
@@ -61,8 +60,8 @@ public class BuildingController {
     @GetMapping(value = "/admin/building-edit-{id}")
     public ModelAndView buildingEdit(@PathVariable("id") Long id, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/building/edit");
-        BuildingEntity building = buildingRepository.findById(id).get();
-        BuildingDTO buildingDTO = buildingDTOConvert.tobuildingDTO(building);
+
+        BuildingDTO buildingDTO = buildingService.getBuildingDTO(id);
         /*BuildingDTO buildingDTO = new BuildingDTO();*/
         mvc.addObject("buildingEdit", buildingDTO);
         mvc.addObject("districts", DistrictCode.type());

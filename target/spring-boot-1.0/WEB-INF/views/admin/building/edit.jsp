@@ -278,10 +278,8 @@
             url: "/api/building",
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json',
             success: function (response) {
-                console.log("API Response:", response);
-
+                window.location.href = "/admin/building-list?message=success";
             },
             error: function (xhr, status, error) {
                 console.log("error")

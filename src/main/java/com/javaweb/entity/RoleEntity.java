@@ -13,10 +13,10 @@ public class RoleEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="code")
+    @Column(name = "code")
     private String code;
 
     public static long getSerialVersionUID() {

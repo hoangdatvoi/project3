@@ -20,6 +20,7 @@ public class BuildingDTOConvert {
         List<String> list = Arrays.asList(item.getType().split(","));
         rs.setTypeCode(list);
 
+
         return rs;
 
     }

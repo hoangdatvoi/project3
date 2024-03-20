@@ -1,9 +1,11 @@
 package com.javaweb.service.impl;
 
-import com.javaweb.converter.BuildingResponseConverter;
+import com.javaweb.converter.*;
 import com.javaweb.entity.AssignmentBuildingEntity;
 import com.javaweb.entity.BuildingEntity;
+import com.javaweb.entity.RentAreaEntity;
 import com.javaweb.entity.UserEntity;
+import com.javaweb.model.dto.AssignmentBuildingDTO;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
@@ -11,12 +13,15 @@ import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.model.response.StaffResponseDTO;
 import com.javaweb.repository.AssignmentBuildingRepository;
 import com.javaweb.repository.BuildingRepository;
+import com.javaweb.repository.RentAreaRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.BuildingService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -29,6 +34,16 @@ public class BuildingServiceImpl implements BuildingService {
     private AssignmentBuildingRepository assignmentBuildingRepository;
     @Autowired
     private BuildingResponseConverter buildingResponseConverter;
+    @Autowired
+    private RentAreaRepository rentAreaRepository;
+    @Autowired
+    private BuildingEntityConvert buildingEntityConvert;
+    @Autowired
+    private AssignmentBuildingConvert assignmentBuildingConvert;
+    @Autowired
+    private RentAreaConvert rentAreaConvert;
+    @Autowired
+    private BuildingDTOConvert buildingDTOConvert;
 
 
     @Override
@@ -71,4 +86,59 @@ public class BuildingServiceImpl implements BuildingService {
         }
         return result;
     }
+
+    @Override
+    public void addOrUpdateBuilding(BuildingDTO buildingDTO) {
+        BuildingEntity building = buildingEntityConvert.toBuildingEntity(buildingDTO);
+        List<RentAreaEntity> rentArea = rentAreaConvert.toRentAreaEntity(buildingDTO);
+        buildingRepository.save(building);
+        if (building.getId() != 0) {
+            rentAreaRepository.deleteByBuildingId(building.getId());
+        }
+        for (RentAreaEntity it : rentArea) {
+            it.setBuilding(building);
+
+            rentAreaRepository.save(it);
+        }
+
+
+    }
+
+    @Override
+    public void deleteBuilding(List<Long> ids) {
+        assignmentBuildingRepository.deleteByBuildingEntityIdIn(ids);
+        rentAreaRepository.deleteByBuildingIdIn(ids);
+        buildingRepository.deleteByIdIn(ids);
+    }
+
+
+    @Override
+    public void updateAssignmentBuilding(AssignmentBuildingDTO assignmentBuildingDTO) {
+        assignmentBuildingRepository.deleteByBuildingEntityId(assignmentBuildingDTO.getBuildingId());
+        List<AssignmentBuildingEntity> rs = assignmentBuildingConvert.toAssignmentBuildingEntity(assignmentBuildingDTO);
+        for (AssignmentBuildingEntity it : rs) {
+            assignmentBuildingRepository.save(it);
+        }
+    }
+
+    @Override
+    public BuildingDTO getBuildingDTO(Long id) {
+        BuildingEntity building = buildingRepository.findById(id).get();
+        BuildingDTO rs = new BuildingDTO();
+        List<RentAreaEntity> rentArea = rentAreaRepository.findByBuildingId(id);
+        String value = "";
+        for (RentAreaEntity it : rentArea) {
+            value += Long.toString(it.getValue()) + ",";
+        }
+        if (!value.isEmpty()) {
+            value = value.substring(0, value.length() - 1);
+        }
+
+        rs = buildingDTOConvert.tobuildingDTO(building);
+        rs.setRentArea(value);
+        return rs;
+
+    }
+
+
 }

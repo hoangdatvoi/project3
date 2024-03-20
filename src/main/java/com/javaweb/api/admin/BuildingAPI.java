@@ -24,49 +24,24 @@ import java.util.List;
 public class BuildingAPI {
     @Autowired
     private BuildingService buildingService;
-    @Autowired
-    private BuildingRepository buildingRepository;
-    @Autowired
-    private RentAreaRepository rentAreaRepository;
-    @Autowired
-    private AssignmentBuildingRepository assignmentBuildingRepository;
-    @Autowired
-    private BuildingEntityConvert buildingEntityConvert;
-    @Autowired
-    private AssignmentBuildingConvert assignmentBuildingConvert;
 
     @PostMapping
     public void addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO) {
-
-        BuildingEntity building = buildingEntityConvert.toBuildingEntity(buildingDTO);
-        buildingRepository.save(building);
+        buildingService.addOrUpdateBuilding(buildingDTO);
     }
-
 
     @DeleteMapping("/{ids}")
     public void deleteBuilding(@PathVariable List<Long> ids) {
-
-        assignmentBuildingRepository.deleteByBuildingEntityIdIn(ids);
-        rentAreaRepository.deleteByBuildingIdIn(ids);
-        buildingRepository.deleteByIdIn(ids);
-
-        System.out.println("ok");
+        buildingService.deleteBuilding(ids);
     }
 
     @GetMapping("/{ids}/staffs")
     public ResponseDTO loadStaffs(@PathVariable Long ids) {
-        ResponseDTO result = buildingService.listStaffs(ids);
-        return result;
+        return buildingService.listStaffs(ids);
     }
 
     @PostMapping("/assignment")
     public void updateAssignmentBuilding(@RequestBody AssignmentBuildingDTO assignmentBuildingDTO) {
-        assignmentBuildingRepository.deleteByBuildingEntityId(assignmentBuildingDTO.getBuildingId());
-        List<AssignmentBuildingEntity> rs = assignmentBuildingConvert.toAssignmentBuildingEntity(assignmentBuildingDTO);
-        for (AssignmentBuildingEntity it : rs) {
-            assignmentBuildingRepository.save(it);
-        }
-        System.out.println("ok");
-
+        buildingService.updateAssignmentBuilding(assignmentBuildingDTO);
     }
 }

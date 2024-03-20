@@ -422,7 +422,6 @@
             url: "/api/building/" + buildingId + "/staffs",
             //   data: JSON.stringify(data),
             //contentType: 'application/json',
-            dataType: 'json',
             success: function (response) {
                 var row = '';
                 $.each(response.data, function (index, item) {
@@ -433,7 +432,8 @@
 
                 });
                 $('#staffList tbody').html(row);
-                console.info("success");
+
+
             },
             error: function (response) {
                 console.log("error");
@@ -465,9 +465,9 @@
             url: "/api/building/assignment",
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json',
             success: function (response) {
-                console.info("success");
+                window.location.href = "/admin/building-list?message=succes";
+
             },
             error: function (response) {
                 console.log("error");
@@ -507,7 +507,7 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                console.log("success");
+                window.location.href = "/admin/building-list?message=succes";
             },
             error: function (response) {
                 console.log("error");
