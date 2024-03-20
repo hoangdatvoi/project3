@@ -39,19 +39,16 @@ public class BuildingEntity extends BaseEntity {
     @Column(name = "brokeragetee")
     private Integer brokeragefee;
 
-    @OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "building", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<RentAreaEntity> items = new ArrayList<>();
 
-    @OneToMany(mappedBy = "buildingEntity", fetch = FetchType.LAZY)
-    private List<AssignmentBuildingEntity> assignmentBuildingEntities = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinTable(name = "assignmentbuilding",
+            joinColumns = @JoinColumn(name = "buildingid", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "staffid", nullable = false)
 
-    public List<AssignmentBuildingEntity> getAssignmentBuildingEntities() {
-        return assignmentBuildingEntities;
-    }
-
-    public void setAssignmentBuildingEntities(List<AssignmentBuildingEntity> assignmentBuildingEntities) {
-        this.assignmentBuildingEntities = assignmentBuildingEntities;
-    }
+    )
+    private List<UserEntity> userEntities = new ArrayList<>();
 
     public String getDistrict() {
         return district;
@@ -63,6 +60,14 @@ public class BuildingEntity extends BaseEntity {
 
     public List<RentAreaEntity> getItems() {
         return items;
+    }
+
+    public List<UserEntity> getUserEntities() {
+        return userEntities;
+    }
+
+    public void setUserEntities(List<UserEntity> userEntities) {
+        this.userEntities = userEntities;
     }
 
     public void setItems(List<RentAreaEntity> items) {
@@ -177,4 +182,3 @@ public class BuildingEntity extends BaseEntity {
         this.type = type;
     }
 }
-

@@ -1,3 +1,4 @@
+/*
 package com.javaweb.repository;
 
 import com.javaweb.entity.AssignmentBuildingEntity;
@@ -13,3 +14,4 @@ public interface AssignmentBuildingRepository extends JpaRepository<AssignmentBu
     void deleteByBuildingEntityId(Long id);
 
 }
+*/

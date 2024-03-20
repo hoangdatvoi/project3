@@ -1,7 +1,7 @@
 package com.javaweb.service.impl;
 
 import com.javaweb.converter.BuildingResponseConverter;
-import com.javaweb.entity.AssignmentBuildingEntity;
+
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.BuildingDTO;
@@ -9,7 +9,7 @@ import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.model.response.StaffResponseDTO;
-import com.javaweb.repository.AssignmentBuildingRepository;
+
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.BuildingService;
@@ -25,8 +25,8 @@ public class BuildingServiceImpl implements BuildingService {
     private BuildingRepository buildingRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private AssignmentBuildingRepository assignmentBuildingRepository;
+    /*  @Autowired
+      private AssignmentBuildingRepository assignmentBuildingRepository;*/
     @Autowired
     private BuildingResponseConverter buildingResponseConverter;
 
@@ -35,30 +35,27 @@ public class BuildingServiceImpl implements BuildingService {
     public ResponseDTO listStaffs(Long buildingId) {
         BuildingEntity building = buildingRepository.findById(buildingId).get();
         List<UserEntity> staffs = userRepository.findByStatusAndRoles_Code(1, "STAFF");
-        List<AssignmentBuildingEntity> assignmentBuildingEntities = assignmentBuildingRepository.findByBuildingEntityId(buildingId);
-        List<UserEntity> staffAssignment = new ArrayList<>();
-        for (AssignmentBuildingEntity item : assignmentBuildingEntities) {
-            staffAssignment.add(item.getUserEntity());
-        }
+        List<UserEntity> staffsassignment = building.getUserEntities();
         List<StaffResponseDTO> staffResponseDTOS = new ArrayList<>();
         ResponseDTO responseDTO = new ResponseDTO();
         for (UserEntity it : staffs) {
             StaffResponseDTO staffResponseDTO = new StaffResponseDTO();
             staffResponseDTO.setFullName(it.getFullName());
             staffResponseDTO.setStaffId(it.getId());
-            if (staffAssignment.contains(it)) {
+            if (staffsassignment.contains(it)) {
                 staffResponseDTO.setChecked("checked");
+
             } else {
                 staffResponseDTO.setChecked("");
             }
             staffResponseDTOS.add(staffResponseDTO);
         }
         responseDTO.setData(staffResponseDTOS);
-        responseDTO.setMessage("success");
         return responseDTO;
 
 
     }
+
 
     @Override
     public List<BuildingSearchResponse> buildingList(BuildingSearchRequest buildingSearchRequest) {

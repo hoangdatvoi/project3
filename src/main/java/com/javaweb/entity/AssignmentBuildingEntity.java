@@ -1,3 +1,4 @@
+/*
 package com.javaweb.entity;
 
 import javax.persistence.*;
@@ -29,3 +30,4 @@ public class AssignmentBuildingEntity extends BaseEntity {
         this.buildingEntity = buildingEntity;
     }
 }
+*/
