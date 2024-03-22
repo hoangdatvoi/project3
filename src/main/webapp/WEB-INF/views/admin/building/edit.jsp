@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
+<c:url var="buildingAPI" value="/api/building"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,6 +215,25 @@
                                     <input type="text" id="note" name="note" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 no-padding-right">Hình đại diện</label>
+                                <input class="col-sm-3 no-padding-right" type="file" id="uploadImage"/>
+                                <div class="col-sm-9">
+                                    <c:if test="${not empty buildingEdit.image}">
+                                        <c:set var="imagePath" value="/repository${buildingEdit.image}"/>
+                                        <img src="${imagePath}" id="viewImage" width="300px" height="300px"
+                                             style="margin-top: 50px">
+                                    </c:if>
+                                    <c:if test="${empty buildingEdit.image}">
+                                        <img src="/admin/image/default.png" id="viewImage" width="300px" height="300px">
+                                    </c:if>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-9">
+
+                            </div>
+
                             <!-- Buttons -->
                             <div class="form-group">
                                 <label class="col-xs-3"></label>
@@ -247,6 +267,8 @@
 <!-- Include your JavaScript libraries here -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    var imageBase64 = '';
+    var imageName = '';
     $(document).ready(function () {
         $('#btnAddOrUpdateBuilding').click(function () {
             var data = {};
@@ -258,6 +280,10 @@
                     data[v.name] = v.value;
                 } else {
                     typeCode.push(v.value);
+                }
+                if ('' !== imageBase64) {
+                    data['imageBase64'] = imageBase64;
+                    data['imageName'] = imageName;
                 }
             });
             data["typeCode"] = typeCode;
@@ -278,9 +304,11 @@
             url: "/api/building",
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json',
+            //  dataType: 'json',
             success: function (response) {
                 console.log("API Response:", response);
+                window.location.href = "/admin/building-list";
+
 
             },
             error: function (xhr, status, error) {
@@ -293,6 +321,35 @@
         window.location.href = "/admin/building-list";
 
     });
+
+
+    $("#cancelBtn").click(function () {
+        showAlertBeforeCancelForm(function () {
+            window.location.href = '/admin/building-list';
+        })
+    });
+
+    $('#uploadImage').change(function (event) {
+        var reader = new FileReader();
+        var file = $(this)[0].files[0];
+        reader.onload = function (e) {
+            imageBase64 = e.target.result;
+            imageName = file.name; // ten hinh khong dau, khoang cach. vd: a-b-c
+        };
+        reader.readAsDataURL(file);
+        openImage(this, "viewImage");
+    });
+
+    function openImage(input, imageView) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#' + imageView).attr('src', reader.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
 </script>
 </body>
 </html>

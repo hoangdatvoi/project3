@@ -465,9 +465,10 @@
             url: "/api/building/assignment",
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json',
+            //  dataType: 'json',
             success: function (response) {
                 console.info("success");
+                window.location.href = "/admin/building-list?message=succes";
             },
             error: function (response) {
                 console.log("error");
@@ -505,9 +506,9 @@
             url: "/api/building/" + data,
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json',
+            //    dataType: 'json',
             success: function (response) {
-                console.log("success");
+                window.location.href = "/admin/building-list?message=succes";
             },
             error: function (response) {
                 console.log("error");

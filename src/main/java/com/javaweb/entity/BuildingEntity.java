@@ -39,6 +39,9 @@ public class BuildingEntity extends BaseEntity {
     @Column(name = "brokeragetee")
     private Integer brokeragefee;
 
+    @Column(name = "image")
+    private String image;
+
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<RentAreaEntity> items = new ArrayList<>();
 
@@ -180,5 +183,13 @@ public class BuildingEntity extends BaseEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -1,6 +1,9 @@
+/*
 package com.javaweb.converter;
 
-import com.javaweb.entity.AssignmentBuildingEntity;
+*/
+/*import com.javaweb.entity.AssignmentBuildingEntity;*//*
+
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.AssignmentBuildingDTO;
@@ -36,3 +39,4 @@ public class AssignmentBuildingConvert {
         return rs;
     }
 }
+*/
