@@ -41,8 +41,7 @@ public class BuildingEntity extends BaseEntity {
 
     @Column(name = "image")
     private String image;
-    @Column(name = "email")
-    private String email;
+
 
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
     private List<RentAreaEntity> items = new ArrayList<>();
@@ -195,11 +194,5 @@ public class BuildingEntity extends BaseEntity {
         this.image = image;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
