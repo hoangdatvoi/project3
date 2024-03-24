@@ -307,6 +307,8 @@
                                                         title="Diện tích thuê"/>
                                         <display:column headerClass="text-left" property="serviceFee"
                                                         title="Phí dịch vụ"/>
+                                        <display:column headerClass="text-left" property="brokerageFee"
+                                                        title="phí môi giới"/>
                                         <display:column headerClass="text-left" property="rentPrice" title="Gía thuê"/>
                                         <display:column headerClass="col-actions" title="Thao tác">
                                             <button class="btn btn-xs btn-success" title="Giao tòa nhà"
