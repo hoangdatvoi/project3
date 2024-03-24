@@ -12,7 +12,9 @@ import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.service.BuildingService;
 import com.javaweb.service.impl.UserService;
+import com.javaweb.utils.DisplayTagUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,9 +40,11 @@ public class BuildingController {
     @GetMapping(value = "/admin/building-list")
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/building/list");
-
-        List<BuildingSearchResponse> responses = buildingService.buildingList(buildingSearchRequest);
-        mvc.addObject("buildingList", responses);
+        DisplayTagUtils.of(request, buildingSearchRequest);
+        List<BuildingSearchResponse> responses = buildingService.getAllBuildings(new PageRequest(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems()));
+        buildingSearchRequest.setListResult(responses);
+        buildingSearchRequest.setTotalItems(buildingService.countTotalItems());
+        mvc.addObject("model", buildingSearchRequest);
         mvc.addObject("modelSearch", buildingSearchRequest);
         mvc.addObject("listStaffs", userService.getStaffs());
         mvc.addObject("districts", DistrictCode.type());

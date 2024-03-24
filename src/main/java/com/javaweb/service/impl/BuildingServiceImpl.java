@@ -20,6 +20,7 @@ import com.javaweb.utils.UploadFileUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -98,7 +99,6 @@ public class BuildingServiceImpl implements BuildingService {
         BuildingEntity building = buildingEntityConvert.toBuildingEntity(buildingDTO);
         List<RentAreaEntity> rentAreas = rentAreaConvert.toRentAreaEntity(buildingDTO);
 
-
         for (RentAreaEntity rentArea : rentAreas) {
             rentArea.setBuilding(building);
         }
@@ -143,6 +143,23 @@ public class BuildingServiceImpl implements BuildingService {
 
     }
 
+    @Override
+    public int countTotalItems() {
+        return buildingRepository.countTotalItem();
+    }
+
+    @Override
+    public List<BuildingSearchResponse> getAllBuildings(Pageable pageable) {
+        List<BuildingEntity> buildingEntities = buildingRepository.getAllBuildings(pageable);
+        List<BuildingSearchResponse> result = new ArrayList<>();
+        for (BuildingEntity item : buildingEntities) {
+            BuildingSearchResponse rs = buildingResponseConverter.toBuildingResponse(item);
+            result.add(rs);
+
+        }
+        return result;
+    }
+
 
     private void saveThumbnail(BuildingDTO buildingDTO, BuildingEntity buildingEntity) {
         String path = "/building/" + buildingDTO.getImageName();
@@ -154,7 +171,8 @@ public class BuildingServiceImpl implements BuildingService {
                 }
             }
             byte[] bytes = Base64.decodeBase64(buildingDTO.getImageBase64().getBytes());
-            uploadFileUtils.writeOrUpdate(path, bytes);
+            UploadFileUtils uploadFileUtils1 = new UploadFileUtils();
+            uploadFileUtils1.writeOrUpdate(path, bytes);
             buildingEntity.setImage(path);
         }
     }
