@@ -97,12 +97,14 @@ public class BuildingServiceImpl implements BuildingService {
 
     public void addOrUpdateBuilding(BuildingDTO buildingDTO) {
         BuildingEntity building = buildingEntityConvert.toBuildingEntity(buildingDTO);
-        List<RentAreaEntity> rentAreas = rentAreaConvert.toRentAreaEntity(buildingDTO);
-
-        for (RentAreaEntity rentArea : rentAreas) {
-            rentArea.setBuilding(building);
+        Long buildingId = buildingDTO.getId();
+        if (buildingId != null) {
+            BuildingEntity foundBuilding = buildingRepository.findById(buildingId)
+                    .orElseThrow(() -> new NotFoundException("Building not found"));
+            building.setImage(foundBuilding.getImage());
+            building.setUserEntities(foundBuilding.getUserEntities());
         }
-        building.setItems(rentAreas);
+
         saveThumbnail(buildingDTO, building);
         buildingRepository.save(building);
     }

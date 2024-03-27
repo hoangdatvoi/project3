@@ -1,6 +1,7 @@
 package com.javaweb.converter;
 
 import com.javaweb.entity.BuildingEntity;
+import com.javaweb.entity.RentAreaEntity;
 import com.javaweb.model.dto.BuildingDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -13,6 +14,8 @@ import java.util.List;
 public class BuildingEntityConvert {
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private RentAreaConvert rentAreaConvert;
 
 
     @Autowired
@@ -30,6 +33,8 @@ public class BuildingEntityConvert {
 
     public BuildingEntity toBuildingEntity(BuildingDTO item) {
         BuildingEntity rs = modelMapper.map(item, BuildingEntity.class);
+        List<RentAreaEntity> rentAreaEntities = rentAreaConvert.toRentAreaEntity(item, rs);
+        rs.setItems(rentAreaEntities);
         List<String> typeCode = item.getTypeCode();
         String convert = String.join(",", typeCode);
         rs.setType(convert);
