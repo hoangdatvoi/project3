@@ -16,7 +16,7 @@ import java.util.List;
 public interface BuildingService {
     ResponseDTO listStaffs(Long buildingId);
 
-    List<BuildingSearchResponse> buildingList(BuildingSearchRequest buildingSearchRequest);
+    List<BuildingSearchResponse> buildingList(BuildingSearchRequest buildingSearchRequest, Pageable pageable);
 
     void addOrUpdateBuilding(BuildingDTO buildingDTO);
 

@@ -84,8 +84,8 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public List<BuildingSearchResponse> buildingList(BuildingSearchRequest buildingSearchRequest) {
-        List<BuildingEntity> buildingEntities = buildingRepository.buildingEntities(buildingSearchRequest);
+    public List<BuildingSearchResponse> buildingList(BuildingSearchRequest buildingSearchRequest, Pageable pageable) {
+        List<BuildingEntity> buildingEntities = buildingRepository.buildingEntities(buildingSearchRequest, pageable);
         List<BuildingSearchResponse> result = new ArrayList<>();
         for (BuildingEntity item : buildingEntities) {
             BuildingSearchResponse rs = buildingResponseConverter.toBuildingResponse(item);

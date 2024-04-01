@@ -27,7 +27,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 
 
     @Override
-    public List<BuildingEntity> buildingEntities(BuildingSearchRequest buildingSearchRequest) {
+    public List<BuildingEntity> buildingEntities(BuildingSearchRequest buildingSearchRequest, Pageable pageable) {
         StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM building b");
         joinTable(buildingSearchRequest, sql);
         System.out.println(sql);
@@ -36,6 +36,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         System.out.println(sql);
         querySpecial(buildingSearchRequest, where);
         sql.append(where);
+        sql.append(" LIMIT ").append(pageable.getPageSize()).append("\n").append(" OFFSET ").append(pageable.getOffset());
         Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
         return query.getResultList();
 
@@ -44,6 +45,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 
     private String buildQueryFilter() {
         String sql = "SELECT * FROM building u WHERE 1 = 1";
+
         return sql;
     }
 

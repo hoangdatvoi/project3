@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface BuildingRepositoryCustom {
-    List<BuildingEntity> buildingEntities(BuildingSearchRequest buildingSearchRequest);
+    List<BuildingEntity> buildingEntities(BuildingSearchRequest buildingSearchRequest, Pageable pageable);
 
     List<BuildingEntity> getAllBuildings(Pageable pageable);
 

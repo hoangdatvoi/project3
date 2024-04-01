@@ -41,7 +41,7 @@ public class BuildingController {
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/building/list");
         DisplayTagUtils.of(request, buildingSearchRequest);
-        List<BuildingSearchResponse> responses = buildingService.getAllBuildings(new PageRequest(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems()));
+        List<BuildingSearchResponse> responses = buildingService.buildingList(buildingSearchRequest, new PageRequest(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems()));
         buildingSearchRequest.setListResult(responses);
         buildingSearchRequest.setTotalItems(buildingService.countTotalItems());
         mvc.addObject("model", buildingSearchRequest);
