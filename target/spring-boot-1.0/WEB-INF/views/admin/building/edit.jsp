@@ -245,6 +245,9 @@
                                         </button>
                                         <button type="button" class="btn btn-primary" id="btnCancel">Hủy thao tác
                                         </button>
+                                        <img src="/img/loading.gif" style="display: none; height: 100px"
+                                             id="loading_image">
+
                                     </c:if>
                                     <c:if test="${ not empty buildingEdit.id}">
                                         <button type="button" class="btn btn-primary" id="btnAddOrUpdateBuilding">Cập
@@ -252,6 +255,9 @@
                                         </button>
                                         <button type="button" class="btn btn-primary" id="btnCancel">Hủy thao tác
                                         </button>
+                                        <img src="/img/loading.gif" style="display: none; height: 100px"
+                                             id="loading_image">
+
                                     </c:if>
                                 </div>
                             </div>
@@ -299,6 +305,8 @@
     });
 
     function addOrUpdateBuilding(data) {
+        $('#loading_image').show();
+
         $.ajax({
             type: 'POST',
             url: "/api/building",
