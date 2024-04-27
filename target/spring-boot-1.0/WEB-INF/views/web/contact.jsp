@@ -270,26 +270,19 @@
     });
 
     function addOrUpdateCustomer(data) {
-        fetch("/api/customer", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Failed to call API");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("API Response:", data);
-                window.location.href = "/admin/customer-list";
-            })
-            .catch(error => {
+        $.ajax({
+            url: "/api/customer",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log("API Response:", response);
+                window.location.href = "/lien-he?message=succes";
+            },
+            error: function (xhr, status, error) {
                 console.error("API Error:", error);
-            });
+            }
+        });
     }
 </script>
 </body>

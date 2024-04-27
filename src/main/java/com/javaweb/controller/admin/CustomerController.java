@@ -61,6 +61,13 @@ public class CustomerController {
         return mvc;
     }
 
+    @GetMapping(value = "/admin/customer-view")
+    public ModelAndView buildingEdit2() {
+        ModelAndView mvc = new ModelAndView("web/contact");
+
+        return mvc;
+    }
+
     @GetMapping(value = "/admin/customer-edit-{id}")
     public ModelAndView buildingEdit1(@PathVariable("id") Long id) {
 
