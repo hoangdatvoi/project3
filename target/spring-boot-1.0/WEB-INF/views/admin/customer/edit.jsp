@@ -188,6 +188,31 @@
                 </c:forEach>
             </div><!-- /.row -->
         </div><!-- /.page-content -->
+        <div class="modal fade" id="report" role="dialog"
+             style="font-family: Arial, sans-serif; font-size: 16px; color: #333; font-weight: bold;">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"
+                            style="font-family: Arial, sans-serif; font-size: 16px; color: #333; font-weight: bold;">
+                            THÔNG BÁO</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <h3 style="font-weight: bold;">success</h3>
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default" id="cancelBtn1">Đóng</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div><!-- /.main-content-inner -->
         <div class="modal fade" id="transactionTypeModal" role="dialog"
              style="font-family: Arial, sans-serif; font-size: 16px; color: #333; font-weight: bold;">
             <div class="modal-dialog">
@@ -206,7 +231,7 @@
                                 tiet giao dich</label>
                             <div class="col-xs-12 col-sm-9">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" id="transactionDetail" class="width-100" value="{}">
+                                    <input type="text" id="transactionDetail" class="width-100" value="">
                                 </span>
                             </div>
                         </div>
@@ -223,114 +248,120 @@
                 </div>
 
             </div>
-        </div>
 
-    </div><!-- /.main-content-inner -->
-</div><!-- /.main-content -->
-
-<!-- Include your JavaScript libraries here -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function transactionType(code, customerId) {
-        $('#transactionTypeModal').modal();
-        $('#customerId').val(customerId);
-        $('#code').val(code);
-    }
-
-    function UpdateTransaction(id, code, customerId, note) {
-        var transactionDetailInput = document.getElementById('transactionDetail');
-        transactionDetailInput.value = note;
-        $('#transactionTypeModal').modal();
-        $('#id').val(id);
-        $('#customerId').val(customerId);
-        $('#code').val(code);
-    }
+        </div><!-- /.main-content-inner -->
 
 
-    $('#btnAddOrUpdateTransaction').click(function (e) {
-        e.preventDefault();
-        var data = {};
-        data['id'] = $('#id').val();
-        data['customerId'] = $('#customerId').val();
-        data['code'] = $('#code').val();
-        data['transactionDetail'] = $('#transactionDetail').val();
-        addTransaction(data);
+    </div><!-- /.main-content -->
 
-    });
+    <!-- Include your JavaScript libraries here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function transactionType(code, customerId) {
+            $('#transactionTypeModal').modal();
+            $('#customerId').val(customerId);
+            $('#code').val(code);
+        }
 
-    function addTransaction(data) {
-        $.ajax({
-            type: 'POST',
-            url: "/api/customer/transaction",
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            //  dataType: 'json',
-            success: function (response) {
-                console.log("API Response:", response);
-                window.location.href = "/admin/customer-list";
+        function UpdateTransaction(id, code, customerId, note) {
+            var transactionDetailInput = document.getElementById('transactionDetail');
+            transactionDetailInput.value = note;
+            $('#transactionTypeModal').modal();
+            $('#id').val(id);
+            $('#customerId').val(customerId);
+            $('#code').val(code);
+        }
 
 
-            },
-            error: function (xhr, status, error) {
-                console.log("error")
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        $('#btnAddOrUpdateCustomer').click(function () {
+        $('#btnAddOrUpdateTransaction').click(function (e) {
+            e.preventDefault();
             var data = {};
-            var formData = $('#listForm').serializeArray();
-            $.each(formData, function (i, v) {
+            data['id'] = $('#id').val();
+            data['customerId'] = $('#customerId').val();
+            data['code'] = $('#code').val();
+            data['transactionDetail'] = $('#transactionDetail').val();
+            addTransaction(data);
 
-                data[v.name] = v.value;
+        });
 
+        function addTransaction(data) {
+            $.ajax({
+                type: 'POST',
+                url: "/api/customer/transaction",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log("API Response:", response);
+                    // Hiển thị modal report sau khi gửi yêu cầu thành công
+                    setTimeout(function () {
+                        $('#report').modal('show'); // Hiển thị modal report
+                        $('#transactionTypeModal').modal('hide'); // Ẩn modal transactionTypeModal
+                    }, 100); // Giảm thiểu thời gian đợi nếu cần
+                },
+                error: function (xhr, status, error) {
+                    console.log("error")
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('#btnAddOrUpdateCustomer').click(function () {
+                var data = {};
+                var formData = $('#listForm').serializeArray();
+                $.each(formData, function (i, v) {
+
+                    data[v.name] = v.value;
+
+
+                });
+
+                // Call the API
+                if (data != "") {
+                    addOrUpdateCustomer(data);
+                } else {
+
+                    window.location.href = "<c:url value = "/admin/customer-edit?typeCode=require" />";
+                }
 
             });
+        });
 
-            // Call the API
-            if (data != "") {
-                addOrUpdateCustomer(data);
-            } else {
+        function addOrUpdateCustomer(data) {
+            $.ajax({
+                type: 'POST',
+                url: "/api/customer",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                //  dataType: 'json',
+                success: function (response) {
+                    console.log("API Response:", response);
+                    window.location.href = "/admin/customer-list";
 
-                window.location.href = "<c:url value = "/admin/customer-edit?typeCode=require" />";
-            }
+
+                },
+                error: function (xhr, status, error) {
+                    console.log("error")
+                }
+            });
+        }
+
+        $("#btnCancel").click(function () {
+            window.location.href = "/admin/customer-list";
 
         });
-    });
-
-    function addOrUpdateCustomer(data) {
-        $.ajax({
-            type: 'POST',
-            url: "/api/customer",
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            //  dataType: 'json',
-            success: function (response) {
-                console.log("API Response:", response);
-                window.location.href = "/admin/customer-list";
 
 
-            },
-            error: function (xhr, status, error) {
-                console.log("error")
-            }
+        $("#cancelBtn").click(function () {
+            showAlertBeforeCancelForm(function () {
+                window.location.href = '/admin/customer-list';
+            })
         });
-    }
+        $("#cancelBtn1").click(function () {
+            window.location.href = "/admin/customer-list";
 
-    $("#btnCancel").click(function () {
-        window.location.href = "/admin/customer-list";
-
-    });
+        });
 
 
-    $("#cancelBtn").click(function () {
-        showAlertBeforeCancelForm(function () {
-            window.location.href = '/admin/customer-list';
-        })
-    });
-
-
-</script>
+    </script>
 </body>
 </html>
