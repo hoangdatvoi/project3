@@ -134,7 +134,7 @@
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
                                                     <button class="btn btn-xs btn-success" title="Giao tòa nhà"
-                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}')">
+                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}','${item.createdDate}','${item.createdBy}')">
                                                         <i class="ace-icon glyphicon glyphicon-list"></i>
                                                     </button>
                                                 </div>
@@ -170,7 +170,7 @@
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
                                                     <button class="btn btn-xs btn-success" title="Giao tòa nhà"
-                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}')">
+                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}','${item.createdDate}','${item.createdBy}')">
                                                         <i class="ace-icon glyphicon glyphicon-list"></i>
                                                     </button>
                                                 </div>
@@ -238,6 +238,8 @@
                         <input type="hidden" name="customerId" id="customerId" value="">
                         <input type="hidden" name="code" id="code" value="">
                         <input type="hidden" name="id" id="id" value="">
+                        <input type="hidden" name="createdDate" id="createdDate" value="">
+                        <input type="hidden" name="createdBy" id="createdBy" value="">
 
                     </div>
                     <div class="modal-footer">
@@ -263,23 +265,39 @@
             $('#code').val(code);
         }
 
-        function UpdateTransaction(id, code, customerId, note) {
+        function UpdateTransaction(id, code, customerId, note, createdDate, createdBy) {
             var transactionDetailInput = document.getElementById('transactionDetail');
             transactionDetailInput.value = note;
             $('#transactionTypeModal').modal();
             $('#id').val(id);
             $('#customerId').val(customerId);
             $('#code').val(code);
+            $('#createdBy').val(createdBy);
+            $('#createdDate').val(createdDate)
         }
 
 
         $('#btnAddOrUpdateTransaction').click(function (e) {
             e.preventDefault();
             var data = {};
+            var id = $('#id').val();
             data['id'] = $('#id').val();
             data['customerId'] = $('#customerId').val();
             data['code'] = $('#code').val();
             data['transactionDetail'] = $('#transactionDetail').val();
+
+
+            if (!id) {
+                data['createdDate'] = $('#createdDate').val();
+
+            } else {
+                var createdDate = new Date($('#createdDate').val());
+                var isoDateString = createdDate.toISOString();
+                data['createdDate'] = isoDateString;
+            }
+
+            data['createdBy'] = $('#createdBy').val();
+
             addTransaction(data);
 
         });

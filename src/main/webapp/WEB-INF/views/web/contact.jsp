@@ -130,7 +130,7 @@
                         <input type="text" class="form-control mt-3" placeholder="Số điện thoại" id="phone"
                                name="phone">
                         <input type="text" class="form-control mt-3" placeholder="Nội dung" id="noidung" name="demand">
-                        <button class="btn btn-primary px-4 mt-3" id="btnAddOrUpdateCustomer1">
+                        <button class="btn btn-primary px-4 mt-3" id="btnAddOrUpdateCustomer1" type="button">
                             Gửi liên hệ
                         </button>
                     </form>

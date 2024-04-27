@@ -36,7 +36,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
     @Override
     public int countTotalItem() {
-        String sql = "select * from customer where 1=1";
+        String sql = "select * from customer where 1=1 and is_active=1";
         Query query = entityManager.createNativeQuery(sql.toString());
         return query.getResultList().size();
     }

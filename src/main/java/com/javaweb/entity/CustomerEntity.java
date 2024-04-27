@@ -19,6 +19,8 @@ public class CustomerEntity extends BaseEntity {
     private String demand;
     @Column(name = "status")
     private String status;
+    @Column(name = "companyname")
+    private String companyName;
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(name = "assignmentcustomer",
             joinColumns = @JoinColumn(name = "customerid"),
@@ -79,5 +81,13 @@ public class CustomerEntity extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

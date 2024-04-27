@@ -29,15 +29,6 @@ public class CustomerAPI {
         customerService.updateAssignmentCustomer(assignmentCustomerDTO);
     }
 
-    @PostMapping("/contract")
-    public void updateAssignmentCustomer1(@ModelAttribute("edit") AssignmentCustomerDTO assignmentCustomerDTO) {
-        // Binding dữ liệu từ form vào đối tượng AssignmentCustomerDTO
-        // (đảm bảo các trường dữ liệu như customerId và staffs đã được đúng cách)
-
-        // Tiến hành cập nhật khách hàng bằng cách gọi phương thức của customerService
-        customerService.updateAssignmentCustomer(assignmentCustomerDTO);
-    }
-
 
     @DeleteMapping("/{ids}")
     public void deleteCustomer(@PathVariable List<Long> ids) {

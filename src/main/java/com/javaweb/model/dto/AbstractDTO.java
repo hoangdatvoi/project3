@@ -1,12 +1,14 @@
 package com.javaweb.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class AbstractDTO<T> implements Serializable {
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.S")
     private static final long serialVersionUID = 7213600440729202783L;
 
     private Long id;
