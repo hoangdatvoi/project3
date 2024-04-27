@@ -37,6 +37,8 @@ public class UserEntity extends BaseEntity {
 
     @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     List<BuildingEntity> buildingEntities = new ArrayList<>();
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<CustomerEntity> customers = new ArrayList<>();
 
 //    @OneToMany(mappedBy="staffs", fetch = FetchType.LAZY)
 //    private List<AssignmentBuildingEntity> assignmentBuildingEntities = new ArrayList<>();

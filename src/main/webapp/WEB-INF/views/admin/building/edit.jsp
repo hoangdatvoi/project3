@@ -270,7 +270,7 @@
     </div><!-- /.main-content-inner -->
 </div><!-- /.main-content -->
 
-<!-- Include your JavaScript libraries here -->
+<!-- Include your JavaScript libraries here -->f
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     var imageBase64 = '';

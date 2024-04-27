@@ -192,13 +192,15 @@
                                                         <label class="name">Điện thoại quản lý</label>
                                                         <form:input path="managerPhone" class="form-control"/>
                                                     </div>
-                                                    <div class="col-xs-2">
-                                                        <label class="name">Nhân viên</label>
-                                                        <form:select class="form-control" path="staffId">
-                                                            <form:option value="">--Chọn nhân viên--</form:option>
-                                                            <form:options items="${listStaffs}"/>
-                                                        </form:select>
-                                                    </div>
+                                                    <security:authorize access="hasRole('MANAGER')">
+                                                        <div class="col-xs-2">
+                                                            <label class="name">Nhân viên</label>
+                                                            <form:select class="form-control" path="staffId">
+                                                                <form:option value="">--Chọn nhân viên--</form:option>
+                                                                <form:options items="${listStaffs}"/>
+                                                            </form:select>
+                                                        </div>
+                                                    </security:authorize>
 
 
                                                 </div>
@@ -311,19 +313,22 @@
                                                         title="phí môi giới"/>
                                         <display:column headerClass="text-left" property="rentPrice" title="Gía thuê"/>
                                         <display:column headerClass="col-actions" title="Thao tác">
-                                            <button class="btn btn-xs btn-success" title="Giao tòa nhà"
-                                                    onclick="assignmentBuilding(${tableList.id})">
-                                                <i class="ace-icon glyphicon glyphicon-list"></i>
-                                            </button>
+                                            <security:authorize access="hasRole('MANAGER')">
+                                                <button class="btn btn-xs btn-success" title="Giao tòa nhà"
+                                                        onclick="assignmentBuilding(${tableList.id})">
+                                                    <i class="ace-icon glyphicon glyphicon-list"></i>
+                                                </button>
+                                            </security:authorize>
                                             <a href="/admin/building-edit-${tableList.id}" title="Sửa tòa nhà"
                                                class="btn btn-xs btn-info">
                                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                                             </a>
-
-                                            <button class="btn btn-xs btn-danger" title="xóa tòa nhà"
-                                                    onclick="deleteBuilding(${tableList.id})">
-                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                            </button>
+                                            <security:authorize access="hasRole('MANAGER')">
+                                                <button class="btn btn-xs btn-danger" title="xóa tòa nhà"
+                                                        onclick="deleteBuilding(${tableList.id})">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+                                            </security:authorize>
                                         </display:column>
                                     </display:table>
                                 </div>
