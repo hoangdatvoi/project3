@@ -134,7 +134,7 @@
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
                                                     <button class="btn btn-xs btn-success" title="Giao tòa nhà"
-                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}')">
+                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}')">
                                                         <i class="ace-icon glyphicon glyphicon-list"></i>
                                                     </button>
                                                 </div>
@@ -170,7 +170,7 @@
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
                                                     <button class="btn btn-xs btn-success" title="Giao tòa nhà"
-                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}')">
+                                                            onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}')">
                                                         <i class="ace-icon glyphicon glyphicon-list"></i>
                                                     </button>
                                                 </div>
@@ -206,7 +206,7 @@
                                 tiet giao dich</label>
                             <div class="col-xs-12 col-sm-9">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" id="transactionDetail" class="width-100">
+                                    <input type="text" id="transactionDetail" class="width-100" value="{}">
                                 </span>
                             </div>
                         </div>
@@ -237,12 +237,15 @@
         $('#code').val(code);
     }
 
-    function UpdateTransaction(id, code, customerId) {
+    function UpdateTransaction(id, code, customerId, note) {
+        var transactionDetailInput = document.getElementById('transactionDetail');
+        transactionDetailInput.value = note;
         $('#transactionTypeModal').modal();
         $('#id').val(id);
         $('#customerId').val(customerId);
         $('#code').val(code);
     }
+
 
     $('#btnAddOrUpdateTransaction').click(function (e) {
         e.preventDefault();
