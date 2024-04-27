@@ -102,7 +102,7 @@
                 </form:form>
                 <c:forEach var="item" items="${transactionType}">
                     <div class="col-xs-12">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" style="margin-bottom: 20px;">
                             <h3 class="header smaller lighter blue">${item.value}</h3>
                             <button class="btn btn-lg btn-primary"
                                     onclick="transactionType('${item.key}',${customerEdit.id})">
