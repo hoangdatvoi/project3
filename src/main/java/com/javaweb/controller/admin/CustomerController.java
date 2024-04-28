@@ -51,7 +51,7 @@ public class CustomerController {
         DisplayTagUtils.of(request, customerDTO);
         List<CustomerDTO> customerDTOList = customerService.listCustomers(customerDTO, new PageRequest(customerDTO.getPage() - 1, customerDTO.getMaxPageItems()));
         customerDTO.setListResult(customerDTOList);
-        customerDTO.setTotalItems(customerService.countTotalItems());
+        customerDTO.setTotalItems(customerService.countTotalItems(customerDTO));
         mvc.addObject("listStaffs", userService.getStaffs());
         mvc.addObject("model", customerDTO);
 

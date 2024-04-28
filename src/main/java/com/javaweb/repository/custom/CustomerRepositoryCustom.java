@@ -11,6 +11,6 @@ public interface CustomerRepositoryCustom {
 
     List<CustomerEntity> customerEntities1(CustomerDTO customerDTO);
 
-    int countTotalItem();
+    int countTotalItem(CustomerDTO customerDTO);
 
 }

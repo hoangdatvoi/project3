@@ -74,8 +74,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
-    public int countTotalItems() {
-        return customerRepository.countTotalItem();
+    public int countTotalItems(CustomerDTO customerDTO) {
+        return customerRepository.countTotalItem(customerDTO);
     }
 
     @Override

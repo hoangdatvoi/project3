@@ -61,9 +61,16 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
     }
 
     @Override
-    public int countTotalItem() {
-        String sql = buildQueryFilter();
-        Query query = entityManager.createNativeQuery(sql.toString());
+    public int countTotalItem(BuildingSearchRequest buildingSearchRequest) {
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM building b");
+        joinTable(buildingSearchRequest, sql);
+        System.out.println(sql);
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+        queryNormal(buildingSearchRequest, where);
+        System.out.println(sql);
+        querySpecial(buildingSearchRequest, where);
+        sql.append(where);
+        Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
         return query.getResultList().size();
     }
 

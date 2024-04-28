@@ -49,19 +49,15 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
     }
 
     @Override
-    public int countTotalItem() {
-        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM customer b ");
-        if (SecurityUtils.getAuthorities().contains("ROLE_STAFF")) {
-            Long staffId = SecurityUtils.getPrincipal().getId();
-
-            sql.append("inner join assignmentcustomer  on b.id=assignmentcustomer.customerid ");
-            sql.append(" WHERE 1=1 and is_active=1 and staffId=" + staffId);
-
-        } else {
-            sql.append("where 1=1 and is_active=1");
-        }
-
-        Query query = entityManager.createNativeQuery(sql.toString());
+    public int countTotalItem(CustomerDTO customerDTO) {
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM customer b");
+        joinTable(customerDTO, sql);
+        System.out.println(sql);
+        StringBuilder where = new StringBuilder(" WHERE 1=1 and is_active=1");
+        queryNormal(customerDTO, where);
+        System.out.println(sql);
+        sql.append(where);
+        Query query = entityManager.createNativeQuery(sql.toString(), CustomerEntity.class);
         return query.getResultList().size();
     }
 

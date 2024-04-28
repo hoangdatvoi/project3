@@ -2,6 +2,7 @@ package com.javaweb.repository.custom;
 
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.UserEntity;
+import com.javaweb.model.dto.CustomerDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import org.springframework.data.domain.Pageable;
 
@@ -12,5 +13,5 @@ public interface BuildingRepositoryCustom {
 
     List<BuildingEntity> getAllBuildings(Pageable pageable);
 
-    int countTotalItem();
+    int countTotalItem(BuildingSearchRequest buildingSearchRequest);
 }

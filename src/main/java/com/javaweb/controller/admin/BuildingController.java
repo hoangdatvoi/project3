@@ -48,7 +48,7 @@ public class BuildingController {
         DisplayTagUtils.of(request, buildingSearchRequest);
         List<BuildingSearchResponse> responses = buildingService.buildingList(buildingSearchRequest, new PageRequest(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems()));
         buildingSearchRequest.setListResult(responses);
-        buildingSearchRequest.setTotalItems(buildingService.countTotalItems());
+        buildingSearchRequest.setTotalItems(buildingService.countTotalItems(buildingSearchRequest));
         mvc.addObject("model", buildingSearchRequest);
         mvc.addObject("modelSearch", buildingSearchRequest);
         mvc.addObject("listStaffs", userService.getStaffs());

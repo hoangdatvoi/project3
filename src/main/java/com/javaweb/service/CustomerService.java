@@ -14,7 +14,7 @@ public interface CustomerService {
 
     ResponseDTO listStaffs(Long customerId);
 
-    int countTotalItems();
+    int countTotalItems(CustomerDTO customerDTO);
 
     void updateAssignmentCustomer(AssignmentCustomerDTO assignmentBuildingDTO);
 

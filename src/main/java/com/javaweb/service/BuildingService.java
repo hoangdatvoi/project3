@@ -27,7 +27,7 @@ public interface BuildingService {
 
     BuildingDTO getBuildingDTO(Long id);
 
-    int countTotalItems();
+    int countTotalItems(BuildingSearchRequest buildingSearchRequest);
 
     List<BuildingSearchResponse> getAllBuildings(Pageable pageable);
 
