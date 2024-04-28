@@ -62,7 +62,7 @@ public class CustomerController {
     @GetMapping(value = "/admin/customer-edit")
     public ModelAndView buildingEdit(@ModelAttribute("customerEdit") CustomerDTO customerDTO, HttpServletRequest request) {
         ModelAndView mvc = new ModelAndView("admin/customer/edit");
-        mvc.addObject("status", StatusType.type());
+        mvc.addObject("statuses", StatusType.type());
         mvc.addObject("transactionType", TransactionType.tracsactionType());
         return mvc;
     }

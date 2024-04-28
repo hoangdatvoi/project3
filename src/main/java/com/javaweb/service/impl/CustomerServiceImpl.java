@@ -104,6 +104,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void addOrUpdateCustomer(CustomerDTO customerDTO) {
         CustomerEntity customer = customerEntityConvert.toCustomerEntity(customerDTO);
+        System.out.println(customer);
+
 
         customerRepository.save(customer);
         System.out.println("ssss");

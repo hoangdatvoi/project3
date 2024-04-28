@@ -20,7 +20,7 @@ public class CustomerEntityConvert {
         CustomerEntity rs = modelMapper.map(item, CustomerEntity.class);
         rs.setIs_active(1);
         rs.setFullName(item.getFullname());
-        if (item.getId() != 0) {
+        if (item.getId() != null) {
             Map<String, String> mp = new TreeMap<>();
             mp = StatusType.type();
             String status = "";
