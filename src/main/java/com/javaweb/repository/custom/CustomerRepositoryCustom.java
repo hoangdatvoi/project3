@@ -9,6 +9,8 @@ import java.util.List;
 public interface CustomerRepositoryCustom {
     List<CustomerEntity> customerEntities(CustomerDTO customerDTO, Pageable pageable);
 
+    List<CustomerEntity> customerEntities1(CustomerDTO customerDTO);
+
     int countTotalItem();
 
 }

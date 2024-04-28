@@ -2,6 +2,7 @@ package com.javaweb.service.impl;
 
 import com.javaweb.converter.CustomerDTOConvert;
 import com.javaweb.converter.CustomerEntityConvert;
+import com.javaweb.converter.CustomerReponse;
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.CustomerEntity;
 import com.javaweb.entity.UserEntity;
@@ -9,6 +10,7 @@ import com.javaweb.model.dto.AssignmentCustomerDTO;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.dto.CustomerDTO;
 import com.javaweb.model.dto.TransactionDTO;
+import com.javaweb.model.request.CustomerSearchRequest;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.model.response.StaffResponseDTO;
 import com.javaweb.repository.CustomerRepository;
@@ -32,6 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
     private UserRepository userRepository;
     @Autowired
     private CustomerEntityConvert customerEntityConvert;
+    @Autowired
+    private CustomerReponse customerReponse;
 
     @Override
     public List<CustomerDTO> listCustomers(CustomerDTO customerDTO, Pageable pageable) {
@@ -39,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<CustomerDTO> result = new ArrayList<>();
         for (CustomerEntity it : customerEntities) {
             CustomerDTO customerDTO1 = new CustomerDTO();
-            customerDTO1 = customerDTOConvert.tobuildingDTO(it);
+            customerDTO1 = customerDTOConvert.tobuildingDTO1(it);
             result.add(customerDTO1);
         }
         return result;
@@ -111,5 +115,17 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerEntity customerEntity = customerRepository.findById(id).get();
         CustomerDTO result = customerDTOConvert.tobuildingDTO(customerEntity);
         return result;
+    }
+
+    @Override
+    public List<CustomerSearchRequest> result(CustomerDTO customerDTO) {
+        List<CustomerEntity> customerEntities1 = customerRepository.customerEntities1(customerDTO);
+        List<CustomerSearchRequest> rs = new ArrayList<>();
+        for (CustomerEntity customer : customerEntities1) {
+            CustomerSearchRequest customerSearchRequest = customerReponse.reponse(customer);
+            rs.add(customerSearchRequest);
+
+        }
+        return rs;
     }
 }

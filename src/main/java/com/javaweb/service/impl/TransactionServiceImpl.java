@@ -42,6 +42,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void updateOrAddTransaction(TransactionDTO transactionDTO) {
         TransactionEntity transactionEntity = transactionConvert.transactionEntity(transactionDTO);
+
         transactionRepository.save(transactionEntity);
     }
 }

@@ -6,6 +6,7 @@ import com.javaweb.model.dto.CustomerDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.repository.CustomerRepository;
 import com.javaweb.repository.custom.CustomerRepositoryCustom;
+import com.javaweb.security.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
@@ -35,8 +36,31 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
     }
 
     @Override
+    public List<CustomerEntity> customerEntities1(CustomerDTO customerDTO) {
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM customer b");
+        joinTable(customerDTO, sql);
+        System.out.println(sql);
+        StringBuilder where = new StringBuilder(" WHERE 1=1 and is_active=1");
+        queryNormal(customerDTO, where);
+        System.out.println(sql);
+        sql.append(where);
+        Query query = entityManager.createNativeQuery(sql.toString(), CustomerEntity.class);
+        return query.getResultList();
+    }
+
+    @Override
     public int countTotalItem() {
-        String sql = "select * from customer where 1=1 and is_active=1";
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT b.* FROM customer b ");
+        if (SecurityUtils.getAuthorities().contains("ROLE_STAFF")) {
+            Long staffId = SecurityUtils.getPrincipal().getId();
+
+            sql.append("inner join assignmentcustomer  on b.id=assignmentcustomer.customerid ");
+            sql.append(" WHERE 1=1 and is_active=1 and staffId=" + staffId);
+
+        } else {
+            sql.append("where 1=1 and is_active=1");
+        }
+
         Query query = entityManager.createNativeQuery(sql.toString());
         return query.getResultList().size();
     }
@@ -74,6 +98,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
         Long staffId = customerDTO.getStaffId();
         if (staffId != null) {
             sql.append(" inner join assignmentcustomer  on b.id=assignmentcustomer.customerid ");
+
 
         }
 

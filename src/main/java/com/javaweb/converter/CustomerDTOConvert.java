@@ -18,6 +18,20 @@ public class CustomerDTOConvert {
 
     public CustomerDTO tobuildingDTO(CustomerEntity item) {
         CustomerDTO rs = modelMapper.map(item, CustomerDTO.class);
+        if (item.getStatus().equals("chưa xử lý")) {
+            rs.setStatus("CXL");
+        } else if (item.getStatus().equals("đã xử lý")) {
+            rs.setStatus("XL");
+        } else {
+            rs.setStatus("DXL");
+        }
+        return rs;
+
+    }
+
+    public CustomerDTO tobuildingDTO1(CustomerEntity item) {
+        CustomerDTO rs = modelMapper.map(item, CustomerDTO.class);
+
         return rs;
 
     }

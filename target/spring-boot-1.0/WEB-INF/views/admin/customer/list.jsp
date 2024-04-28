@@ -141,121 +141,126 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <div class="col-xs-12 ">
-                                                    <div class="col-xs-6">
-                                                        <button type="button" class="btn  btn-xs btn-danger "
-                                                                id="btnSearchBuilding"
-                                                                style="background-color: red;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor" class="bi bi-search"
-                                                                 viewBox="0 0 16 16">
-                                                                <path
-                                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
-                                                                </path>
-                                                            </svg>
-                                                            Tìm kiếm
-                                                        </button>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    <button type="button" class="btn  btn-xs btn-danger "
+                                                            id="btnSearchBuilding"
+                                                            style="background-color: red;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16" fill="currentColor" class="bi bi-search"
+                                                             viewBox="0 0 16 16">
+                                                            <path
+                                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
+                                                            </path>
+                                                        </svg>
+                                                        Tìm kiếm
+                                                    </button>
 
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <div class="pull-right">
-                                                            <a href="/admin/customer-edit" title="Cập nhật khách hàng">
-                                                                <i class="btn btn-info btn-"
-                                                                   title="Thêm khách hàng">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                         height="16" fill="currentColor"
-                                                                         class="bi bi-building-add" viewBox="0 0 16 16">
-                                                                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
-                                                                        <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
-                                                                        <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                                                                    </svg>
-                                                                </i>
-                                                            </a>
-
-                                                            <button class="btn btn-danger" title="xóa khách hàng"
-                                                                    id="btnDeleteCustomer">
-                                                                <svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16"
-                                                                        fill="currentColor" class="bi bi-building-dash"
-                                                                        viewBox="0 0 16 16">
-                                                                    <path
-                                                                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1"/>
-                                                                    <path
-                                                                            d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
-                                                                    <path
-                                                                            d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-
-                                                    </div>
                                                 </div>
                                             </div>
+
 
                                         </div>
                                     </form:form>
 
-                                </div>
 
+                                </div>
 
                             </div>
 
 
                             <!-- Bảng danh sách -->
-                            <div style="font-family: 'Times New Roman'">
-                                <div class="table-responsive">
-                                    <display:table name="model.listResult" cellspacing="0" cellpadding="0"
-                                                   requestURI="/admin/customer-list" partialList="true" sort="external"
-                                                   size="${model.totalItems}" defaultsort="2" defaultorder="ascending"
-                                                   id="tableList" pagesize="${model.maxPageItems}"
-                                                   export="false"
-                                                   class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
-                                                   style="margin: 3em 0 1.5em;">
-                                        <display:column title="<fieldset class='form-group'>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 ">
+                                <div class="col-xs-6"></div>
+                                <div class="col-xs-6">
+                                    <div class="pull-right">
+                                        <a href="/admin/customer-edit" title="Cập nhật khách hàng">
+                                            <i class="btn btn-info btn-"
+                                               title="Thêm khách hàng">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                     height="16" fill="currentColor"
+                                                     class="bi bi-building-add" viewBox="0 0 16 16">
+                                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+                                                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
+                                                    <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                                                </svg>
+                                            </i>
+                                        </a>
+
+                                        <button class="btn btn-danger" title="xóa khách hàng"
+                                                id="btnDeleteCustomer">
+                                            <svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16"
+                                                    fill="currentColor" class="bi bi-building-dash"
+                                                    viewBox="0 0 16 16">
+                                                <path
+                                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1"/>
+                                                <path
+                                                        d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
+                                                <path
+                                                        d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="font-family: 'Times New Roman'">
+                            <div class="table-responsive">
+                                <display:table name="model.listResult" cellspacing="0" cellpadding="0"
+                                               requestURI="/admin/customer-list" partialList="true" sort="external"
+                                               size="${model.totalItems}" defaultsort="2" defaultorder="ascending"
+                                               id="tableList" pagesize="${model.maxPageItems}"
+                                               export="false"
+                                               class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
+                                               style="margin: 3em 0 1.5em;">
+                                    <display:column title="<fieldset class='form-group'>
 												        <input type='checkbox' id='checkAll' class='check-box-element'>
 												        </fieldset>" class="center select-cell"
-                                                        headerClass="center select-cell">
-                                            <fieldset>
-                                                <input type="checkbox" name="checkList" value="${tableList.id}"
-                                                       id="checkbox_${tableList.id}" class="check-box-element"/>
-                                            </fieldset>
-                                        </display:column>
-                                        <display:column headerClass="text-left" property="fullname"
-                                                        title="Tên khách hàng"/>
-                                        <display:column headerClass="text-left" property="phone"
-                                                        title="Di động"/>
-                                        <display:column headerClass="text-left" property="email"
-                                                        title="Email"/>
-                                        <display:column headerClass="text-left" property="demand"
-                                                        title="Nhu cầu"/>
-                                        <display:column headerClass="text-left" property="createdBy"
-                                                        title="Người thêm"/>
+                                                    headerClass="center select-cell">
+                                        <fieldset>
+                                            <input type="checkbox" name="checkList" value="${tableList.id}"
+                                                   id="checkbox_${tableList.id}" class="check-box-element"/>
+                                        </fieldset>
+                                    </display:column>
+                                    <display:column headerClass="text-left" property="fullname"
+                                                    title="Tên khách hàng"/>
+                                    <display:column headerClass="text-left" property="phone"
+                                                    title="Di động"/>
+                                    <display:column headerClass="text-left" property="email"
+                                                    title="Email"/>
+                                    <display:column headerClass="text-left" property="demand"
+                                                    title="Nhu cầu"/>
+                                    <display:column headerClass="text-left" property="createdBy"
+                                                    title="Người thêm"/>
 
-                                        <display:column headerClass="text-left" property="createdDate"
-                                                        title="Ngày thêm"/>
-                                        <display:column headerClass="text-left" property="status"
-                                                        title="Ngày thêm"/>
-                                        <display:column headerClass="col-actions" title="Thao tác">
-                                            <security:authorize access="hasRole('MANAGER')">
-                                                <button class="btn btn-xs btn-success" title="Giao khach hang"
-                                                        onclick="assignmentCustomer(${tableList.id})">
-                                                    <i class="ace-icon glyphicon glyphicon-list"></i>
-                                                </button>
-                                            </security:authorize>
-                                            <a href="/admin/customer-edit-${tableList.id}" title="Cap nhat khach hang"
-                                               class="btn btn-xs btn-info">
-                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                            </a>
-
-                                            <button class="btn btn-xs btn-danger" title="xóa khach hang"
-                                                    onclick="deleteCustomer(${tableList.id})">
-                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    <display:column headerClass="text-left" property="createdDate"
+                                                    title="Ngày thêm"/>
+                                    <display:column headerClass="text-left" property="status"
+                                                    title="Tình trạng"/>
+                                    <display:column headerClass="col-actions" title="Thao tác">
+                                        <security:authorize access="hasRole('MANAGER')">
+                                            <button class="btn btn-xs btn-success" title="Giao khach hang"
+                                                    onclick="assignmentCustomer(${tableList.id})">
+                                                <i class="ace-icon glyphicon glyphicon-list"></i>
                                             </button>
-                                        </display:column>
-                                    </display:table>
-                                </div>
+                                        </security:authorize>
+                                        <a href="/admin/customer-edit-${tableList.id}" title="Cap nhat khach hang"
+                                           class="btn btn-xs btn-info">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+
+                                        <button class="btn btn-xs btn-danger" title="xóa khach hang"
+                                                onclick="deleteCustomer(${tableList.id})">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </button>
+                                    </display:column>
+                                </display:table>
                             </div>
                         </div>
                     </div>

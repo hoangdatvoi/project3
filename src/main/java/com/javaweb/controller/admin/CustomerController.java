@@ -1,5 +1,6 @@
 package com.javaweb.controller.admin;
 
+import com.javaweb.converter.CustomerEntityConvert;
 import com.javaweb.entity.CustomerEntity;
 import com.javaweb.enums.BuildingType;
 import com.javaweb.enums.DistrictCode;
@@ -13,6 +14,7 @@ import com.javaweb.security.utils.SecurityUtils;
 import com.javaweb.service.CustomerService;
 import com.javaweb.service.TransactionService;
 import com.javaweb.service.impl.UserService;
+import com.javaweb.utils.ConvertUtil;
 import com.javaweb.utils.DisplayTagUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +35,9 @@ public class CustomerController {
     private TransactionService transactionService;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private ConvertUtil convertUtil;
+
 
     @RequestMapping(value = "/admin/customer-list", method = RequestMethod.GET)
     public ModelAndView customerList(@ModelAttribute CustomerDTO customerDTO, HttpServletRequest request) {
@@ -42,6 +47,7 @@ public class CustomerController {
             customerDTO.setStaffId(staffId);
 
         }
+
         DisplayTagUtils.of(request, customerDTO);
         List<CustomerDTO> customerDTOList = customerService.listCustomers(customerDTO, new PageRequest(customerDTO.getPage() - 1, customerDTO.getMaxPageItems()));
         customerDTO.setListResult(customerDTOList);
@@ -73,7 +79,7 @@ public class CustomerController {
 
         ModelAndView mvc = new ModelAndView("admin/customer/edit");
         mvc.addObject("customerEdit", customerService.customer(id));
-        mvc.addObject("status", StatusType.type());
+        mvc.addObject("statuses", StatusType.type());
         mvc.addObject("transactionType", TransactionType.tracsactionType());
         mvc.addObject("transactionCSKH", transactionService.transactionCSKH("CSKH", id));
         mvc.addObject("transactionDDX", transactionService.transactionDDX("DDX", id));

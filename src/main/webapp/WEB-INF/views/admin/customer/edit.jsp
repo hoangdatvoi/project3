@@ -61,17 +61,15 @@
                                 </div>
                             </div>
 
-                            <!-- Quận -->
                             <div class="form-group">
                                 <label class="col-xs-3">Tình trạng </label>
                                 <div class="col-xs-9">
                                     <form:select class="form-control" path="status">
                                         <form:option value="">---Chọn tình trang---</form:option>
-                                        <form:options items="${status}"/>
+                                        <form:options items="${statuses}"/>
                                     </form:select>
                                 </div>
                             </div>
-                            <!-- Phường -->
 
 
                             <!-- Buttons -->

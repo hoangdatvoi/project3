@@ -2,6 +2,7 @@ package com.javaweb.service;
 
 import com.javaweb.entity.CustomerEntity;
 import com.javaweb.model.dto.*;
+import com.javaweb.model.request.CustomerSearchRequest;
 import com.javaweb.model.response.ResponseDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public interface CustomerService {
     void addOrUpdateCustomer(CustomerDTO customerDTO);
 
     CustomerDTO customer(Long id);
+
+    List<CustomerSearchRequest> result(CustomerDTO customerDTO);
 
 
 }
