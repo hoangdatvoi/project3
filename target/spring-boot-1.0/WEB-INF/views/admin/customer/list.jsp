@@ -123,11 +123,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
+
+                                                    <div class="col-xs-6">
+                                                        <label class="name"> Email</label>
+                                                        <form:input path="email" class="form-control"/>
+                                                    </div>
                                                     <security:authorize access="hasRole('MANAGER')">
-                                                        <div class="col-xs-6">
-                                                            <label class="name"> Email</label>
-                                                            <form:input path="email" class="form-control"/>
-                                                        </div>
                                                         <div class="col-xs-6">
                                                             <label class="name">Nhân viên</label>
                                                             <form:select class="form-control" path="staffId">

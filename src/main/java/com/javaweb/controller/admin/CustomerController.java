@@ -59,18 +59,20 @@ public class CustomerController {
         return mvc;
     }
 
-    @GetMapping(value = "/admin/customer-edit")
-    public ModelAndView buildingEdit(@ModelAttribute("customerEdit") CustomerDTO customerDTO, HttpServletRequest request) {
-        ModelAndView mvc = new ModelAndView("admin/customer/edit");
-        mvc.addObject("statuses", StatusType.type());
-        mvc.addObject("transactionType", TransactionType.tracsactionType());
-        return mvc;
-    }
 
     @GetMapping(value = "/admin/customer-view")
     public ModelAndView buildingEdit2() {
         ModelAndView mvc = new ModelAndView("web/contact");
 
+        return mvc;
+    }
+
+
+    @GetMapping(value = "/admin/customer-edit")
+    public ModelAndView buildingEdit(@ModelAttribute("customerEdit") CustomerDTO customerDTO, HttpServletRequest request) {
+        ModelAndView mvc = new ModelAndView("admin/customer/edit");
+        mvc.addObject("statuses", StatusType.type());
+        mvc.addObject("transactionType", TransactionType.tracsactionType());
         return mvc;
     }
 

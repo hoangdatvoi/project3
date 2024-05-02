@@ -131,7 +131,8 @@
                                             <td>${item.note}</td>
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
-                                                    <button class="btn btn-xs btn-success" title="Giao tòa nhà"
+                                                    <button class="btn btn-xs btn-success"
+                                                            title="Chỉnh sửa chi tiết giao dịch"
                                                             onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}','${item.createdDate}','${item.createdBy}')">
                                                         <i class="ace-icon glyphicon glyphicon-list"></i>
                                                     </button>
@@ -167,7 +168,8 @@
                                             <td>${item.note}</td>
                                             <td>
                                                 <div class="hidden-sm hidden-xs btn-group">
-                                                    <button class="btn btn-xs btn-success" title="Giao tòa nhà"
+                                                    <button class="btn btn-xs btn-success"
+                                                            title="Chỉnh sửa chi tiết giao dịch"
                                                             onclick="UpdateTransaction(${item.id},'${item.code}','${item.customerId}','${item.note}','${item.createdDate}','${item.createdBy}')">
                                                         <i class="ace-icon glyphicon glyphicon-list"></i>
                                                     </button>
@@ -309,10 +311,11 @@
                 success: function (response) {
                     console.log("API Response:", response);
                     // Hiển thị modal report sau khi gửi yêu cầu thành công
-                    setTimeout(function () {
-                        $('#report').modal('show'); // Hiển thị modal report
-                        $('#transactionTypeModal').modal('hide'); // Ẩn modal transactionTypeModal
-                    }, 100); // Giảm thiểu thời gian đợi nếu cần
+
+                    //  window.location.href = "/api/customer/transaction?message=success";
+                    window.location.reload();
+
+
                 },
                 error: function (xhr, status, error) {
                     console.log("error")
@@ -348,15 +351,15 @@
                 url: "/api/customer",
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                //  dataType: 'json',
                 success: function (response) {
                     console.log("API Response:", response);
-                    window.location.href = "/admin/customer-list";
 
+                    window.location.href = "/admin/customer-list?message=success";
 
                 },
                 error: function (xhr, status, error) {
-                    console.log("error")
+                    console.log("Error:", error);
+                    // Handle error, show a message to the user, etc.
                 }
             });
         }
