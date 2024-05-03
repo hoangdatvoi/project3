@@ -112,6 +112,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public void deleteBuilding(List<Long> ids) {
+
         buildingRepository.deleteByIdIn(ids);
     }
 

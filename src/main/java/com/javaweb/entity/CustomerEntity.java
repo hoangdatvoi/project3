@@ -21,11 +21,12 @@ public class CustomerEntity extends BaseEntity {
     private String status;
     @Column(name = "companyname")
     private String companyName;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "assignmentcustomer",
             joinColumns = @JoinColumn(name = "customerid"),
             inverseJoinColumns = @JoinColumn(name = "staffid"))
     private List<UserEntity> users = new ArrayList<>();
+
 
     public String getDemand() {
         return demand;
